@@ -3,7 +3,7 @@ Este repositório tem um o objetivo de desenvolver o projeto da disciplina de li
 
 ## Alunos Participantes:
 - Andrew Galvão de Figueiredo Oliveira
-- Danilo Santos Vieira (@danilosvsv)
+- Danilo Santos Vieira ([@danilosvsv](https://github.com/Danilosvsv))
 - Gerson Junior Fragoso de Araújo
 - Maciel Ferreira Lima
 - Nayara Xavier de Melo Alves
