@@ -2,17 +2,17 @@
 
 import javax.swing.JFrame;
 
-import model.Fase;
+import meujogo.model.Fase;
 
 public class Container extends JFrame {
 
-    public Container(){
+    public Container() {
         add(new Fase());
         setTitle("Meu Jogo");
-        setSize(1024,728);
+        setSize(1024, 728);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        this.setResizable(false);
+        this.setResizable(true);
         setVisible(true);
 
     }
