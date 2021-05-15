@@ -62,7 +62,7 @@ public class Player implements ActionListener {
     public void turbo() {
         isTurbo = true;
 
-        ImageIcon ref = new ImageIcon("res\\player1.png"); // TODO: Trocar para Imagem do Turbo
+        ImageIcon ref = new ImageIcon("res\\player1.png"); // todo: Trocar para Imagem do Turbo
         imagem = ref.getImage();
     }
 
