@@ -1,4 +1,3 @@
-// package src.meujogo;
 
 import javax.swing.JFrame;
 
