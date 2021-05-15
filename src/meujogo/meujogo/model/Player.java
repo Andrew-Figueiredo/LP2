@@ -1,28 +1,52 @@
 package meujogo.model;
 
 import java.awt.Image;
-
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Player {
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
+public class Player implements ActionListener {
     private int x, y;
     private int dx, dy;
     private Image imagem;
     private int altura, largura;
+    private List<Tiro> tiros;
+    private boolean isVisivel, isTurbo;
+    private Timer timer;
 
     public Player() {
-        this.x = 100;
-        this.y = 100;
+        this.x = 25;
+        this.y = 256;
+        isVisivel = true;
+        isTurbo = false;
+
+        tiros = new ArrayList<Tiro>();
+
+        timer = new Timer(5, this); // Velocidade do jogo
+        timer.start();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        turbo();
 
     }
 
     public void load() {
         ImageIcon ref = new ImageIcon("res\\player1.png");
         imagem = ref.getImage();
-        Image aaa = imagem.getScaledInstance(110, 50, 5);
-        altura = aaa.getHeight(null);
-        largura = aaa.getWidth(null);
+
+        altura = imagem.getHeight(null);
+        largura = imagem.getWidth(null);
 
     }
 
@@ -31,9 +55,28 @@ public class Player {
         y += dy;
     }
 
+    public void tiroSimples() {
+        this.tiros.add(new Tiro(x + largura, y + (altura / 2)));
+    }
+
+    public void turbo() {
+        isTurbo = true;
+
+        ImageIcon ref = new ImageIcon("res\\player1.png"); // TODO: Trocar para Imagem do Turbo
+        imagem = ref.getImage();
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, largura, altura);
+    }
+
     public void keyPressed(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
-        int velocidade_nave = 12; // Velocidade em que a nave se movimenta.
+        int velocidade_nave = 15; // Velocidade em que a nave se movimenta.
+        if (codigo == KeyEvent.VK_A) {
+            tiroSimples();
+            ;
+        }
         if (codigo == KeyEvent.VK_UP) {
             dy = -velocidade_nave;
         }
@@ -75,6 +118,18 @@ public class Player {
 
     public int getY() {
         return y;
+    }
+
+    public List<Tiro> getTiros() {
+        return tiros;
+    }
+
+    public boolean isVisivel() {
+        return isVisivel;
+    }
+
+    public void setVisivel(boolean isVisivel) {
+        this.isVisivel = isVisivel;
     }
 
 }
