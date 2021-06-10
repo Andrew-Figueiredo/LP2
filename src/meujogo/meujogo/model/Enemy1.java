@@ -12,7 +12,7 @@ public class Enemy1 {
     private boolean isVisivel;
 
     // private static final int LARGURA = 938; // onde o tiro some
-    private static int VELOCIDADE = 2; // Velocidade do Enemy
+    private static int VELOCIDADE = 3; // Velocidade do Enemy
 
     public Enemy1(int x, int y) {
         this.x = x;

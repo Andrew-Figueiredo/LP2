@@ -54,7 +54,7 @@ public class Fase extends JPanel implements ActionListener {
     }
 
     public void inicializaStars() {
-        int coordenadas[] = new int[40];
+        int coordenadas[] = new int[500];
         stars = new ArrayList<Stars>();
 
         for (int i = 0; i < coordenadas.length; i++) {
@@ -102,6 +102,12 @@ public class Fase extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         player.update();
+        if (player.isTurbo()) {
+            timer.setDelay(1);
+        }
+        if (player.isTurbo() == false) {
+            timer.setDelay(5);
+        }
 
         for (int p = 0; p < stars.size(); p++) {
             Stars on = stars.get(p);
@@ -117,6 +123,13 @@ public class Fase extends JPanel implements ActionListener {
             Tiro m = tiros.get(i);
             if (m.isVisivel()) {
                 m.update();
+                if (player.isTurbo()) {
+                    tiros.get(i).setVELOCIDADE(-1);
+                }
+                if (player.isTurbo() == false) {
+                    tiros.get(i).setVELOCIDADE(2);
+
+                }
             } else {
                 tiros.remove(i);
             }
@@ -144,9 +157,14 @@ public class Fase extends JPanel implements ActionListener {
             formaEnemy1 = tempEnemy1.getBounds();
 
             if (formaNave.intersects(formaEnemy1)) {
-                player.setVisivel(false);
-                tempEnemy1.setVisivel(false);
-                emJogo = false;
+                if (player.isTurbo()) {
+                    tempEnemy1.setVisivel(false);
+                } else {
+
+                    player.setVisivel(false);
+                    tempEnemy1.setVisivel(false);
+                    emJogo = false;
+                }
             }
         }
 

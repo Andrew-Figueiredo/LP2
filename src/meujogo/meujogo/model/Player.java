@@ -10,8 +10,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 
 public class Player implements ActionListener {
     private int x, y;
@@ -30,14 +28,21 @@ public class Player implements ActionListener {
 
         tiros = new ArrayList<Tiro>();
 
-        timer = new Timer(5, this); // Velocidade do jogo
+        timer = new Timer(5000, this); // Velocidade do jogo
         timer.start();
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        turbo();
+        if (isTurbo == true) {
+            turbo();
+            isTurbo = false;
+        }
+
+        if (isTurbo == false) {
+            load();
+        }
 
     }
 
@@ -62,7 +67,7 @@ public class Player implements ActionListener {
     public void turbo() {
         isTurbo = true;
 
-        ImageIcon ref = new ImageIcon("res\\player1.png"); // todo: Trocar para Imagem do Turbo
+        ImageIcon ref = new ImageIcon("res\\Tiro1.png"); // todo: Trocar para Imagem do Turbo
         imagem = ref.getImage();
     }
 
@@ -73,9 +78,14 @@ public class Player implements ActionListener {
     public void keyPressed(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         int velocidade_nave = 15; // Velocidade em que a nave se movimenta.
+
+        if (codigo == KeyEvent.VK_SPACE) {
+            turbo();
+        }
         if (codigo == KeyEvent.VK_A) {
-            tiroSimples();
-            ;
+            if (isTurbo == false) {
+                tiroSimples();
+            }
         }
         if (codigo == KeyEvent.VK_UP) {
             dy = -velocidade_nave;
@@ -130,6 +140,10 @@ public class Player implements ActionListener {
 
     public void setVisivel(boolean isVisivel) {
         this.isVisivel = isVisivel;
+    }
+
+    public boolean isTurbo() {
+        return isTurbo;
     }
 
 }
