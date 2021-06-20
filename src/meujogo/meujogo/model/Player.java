@@ -77,7 +77,7 @@ public class Player implements ActionListener {
 
     public void keyPressed(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
-        int velocidade_nave = 15; // Velocidade em que a nave se movimenta.
+        int velocidade_nave = 10; // Velocidade em que a nave se movimenta.
 
         if (codigo == KeyEvent.VK_SPACE) {
             turbo();
